@@ -19,6 +19,7 @@ parser = argparse.ArgumentParser(description='train-addernet')
 # Basic model parameters.
 parser.add_argument('--data', type=str, default='/cache/data/')
 parser.add_argument('--output_dir', type=str, default='/cache/models/')
+parser.add_argument('--epochs', type=int, default=400, help='Number of epochs to train the model')
 args = parser.parse_args()
 
 os.makedirs(args.output_dir, exist_ok=True)  
