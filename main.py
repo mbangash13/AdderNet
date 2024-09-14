@@ -108,9 +108,11 @@ def train_and_test(epoch):
  
  
 def main():
-    epoch = 400
-    for e in range(1, epoch):
-        train_and_test(e)
+epoch = args.epochs
+
+# Use epoch in the training loop:
+for e in range(1, epoch + 1):
+    train_and_test(e)
     torch.save(net,args.output_dir + 'addernet')
  
  
