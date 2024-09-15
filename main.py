@@ -107,10 +107,10 @@ def train_and_test(epoch):
  
  
 def main():
-    epoch = 50
+    epoch = 51
     for e in range(1, epoch):
         train_and_test(e)
-    torch.save(net,args.output_dir + 'addernet')
+    torch.save(net,args.output_dir + 'addernet.pth')
  
  
 if __name__ == '__main__':
