@@ -8,7 +8,7 @@ import os
 from resnet20 import resnet20
 import torch
 from torch.autograd import Variable
-from torchvision.datasets import CIFAR10
+from torchvision.datasets import MNIST
 import torchvision.transforms as transforms
 from torch.utils.data import DataLoader 
 import argparse
@@ -27,22 +27,20 @@ acc = 0
 acc_best = 0
 
 transform_train = transforms.Compose([
-    transforms.RandomCrop(32, padding=4),
+    transforms.Resize((32, 32)),  # Resize MNIST images to 32x32
     transforms.RandomHorizontalFlip(),
     transforms.ToTensor(),
-    transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
+    transforms.Normalize((0.1307,), (0.3081,)),  # Normalize for MNIST
 ])
 
 transform_test = transforms.Compose([
+    transforms.Resize((32, 32)),
     transforms.ToTensor(),
-    transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
+    transforms.Normalize((0.1307,), (0.3081,)),
 ])
 
-data_train = CIFAR10(args.data,
-                   transform=transform_train)
-data_test = CIFAR10(args.data,
-                  train=False,
-                  transform=transform_test)
+data_train = MNIST(args.data, train=True, transform=transform_train, download=True)
+data_test = MNIST(args.data, train=False, transform=transform_test)
 
 data_train_loader = DataLoader(data_train, batch_size=256, shuffle=True, num_workers=8)
 data_test_loader = DataLoader(data_test, batch_size=100, num_workers=0)
