@@ -33,11 +33,12 @@ def main():
     elif args.dataset == 'ImageNet':
         import resnet50
         model = resnet50.resnet50()
-        
+
+
+    model = torch.load(args.model_dir)
+  
     model = torch.nn.DataParallel(model).cuda()
     
-    model.load_state_dict(torch.load(args.model_dir))
-
     cudnn.benchmark = True
 
     # Data loading code
