@@ -44,7 +44,7 @@ def main():
     # Data loading code
     
     if args.dataset == 'mnist':
-    val_loader = torch.utils.data.DataLoader(
+       val_loader = torch.utils.data.DataLoader(
         datasets.MNIST(args.data_dir, train=False, transform=transforms.Compose([
             transforms.Resize((32, 32)),
             transforms.ToTensor(),
