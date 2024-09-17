@@ -27,7 +27,7 @@ args, unparsed = parser.parse_known_args()
 def main():
 
     # create model
-    if args.dataset == 'MNIST':
+    if args.dataset == 'mnist':
         import resnet20
         model = resnet20.resnet20()
     elif args.dataset == 'ImageNet':
@@ -43,14 +43,16 @@ def main():
 
     # Data loading code
     
-    if args.dataset == 'cifar10':
-        val_loader = torch.utils.data.DataLoader(
-            datasets.CIFAR10(args.data_dir, train=False, transform = transforms.Compose([
-                transforms.ToTensor(),
-                transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))
-            ])),
-            batch_size=args.batch_size, shuffle=False,
-            num_workers=args.workers, pin_memory=True)
+    if args.dataset == 'mnist':
+    val_loader = torch.utils.data.DataLoader(
+        datasets.MNIST(args.data_dir, train=False, transform=transforms.Compose([
+            transforms.Resize((32, 32)),
+            transforms.ToTensor(),
+            transforms.Normalize((0.1307,), (0.3081,))
+        ])),
+        batch_size=args.batch_size, shuffle=False,
+        num_workers=args.workers, pin_memory=True
+    )
     elif args.dataset == 'ImageNet':
         val_loader = torch.utils.data.DataLoader(
             datasets.ImageFolder(args.data_dir, transforms.Compose([
