@@ -27,7 +27,7 @@ args, unparsed = parser.parse_known_args()
 def main():
 
     # create model
-    if args.dataset == 'cifar10':
+    if args.dataset == 'MNIST':
         import resnet20
         model = resnet20.resnet20()
     elif args.dataset == 'ImageNet':
