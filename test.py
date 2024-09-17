@@ -8,19 +8,17 @@ import torch.backends.cudnn as cudnn
 import torchvision.transforms as transforms
 import torchvision.datasets as datasets
 
-parser = argparse.ArgumentParser(description='PyTorch ImageNet Training')
-parser.add_argument('--dataset', type=str, default='ImageNet', choices=['cifar10','ImageNet'])
+parser = argparse.ArgumentParser(description='PyTorch MNIST and ImageNet Testing for AdderNet')
+parser.add_argument('--dataset', type=str, default='mnist', choices=['mnist', 'cifar10', 'ImageNet'],
+                    help='Dataset to use: mnist, cifar10, or ImageNet')
 parser.add_argument('-j', '--workers', default=4, type=int, metavar='N',
-                    help='number of data loading workers (default: 4)')
+                    help='Number of data loading workers (default: 4)')
 parser.add_argument('-b', '--batch-size', default=256, type=int,
                     metavar='N',
-                    help='mini-batch size (default: 256), this is the total '
-                         'batch size of all GPUs on the current node when '
-                         'using Data Parallel or Distributed Data Parallel')
-parser.add_argument('--data_dir', type=str,
-                    help='path to dataset',default="/cache/imagenet/val/")
-parser.add_argument('--model_dir', type=str,
-                    help='path to dataset',default="models/ResNet50-AdderNet.pth")
+                    help='Mini-batch size (default: 256)')
+parser.add_argument('--data_dir', type=str, help='Path to dataset', default="./data/")
+parser.add_argument('--model_dir', type=str, help='Path to saved model', default="models/addernet.pth")
+args, unparsed = parser.parse_known_args()
 best_acc1 = 0
 args, unparsed = parser.parse_known_args()
 
